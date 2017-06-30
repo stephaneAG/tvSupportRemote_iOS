@@ -1,0 +1,38 @@
+/* tv support remote webapp V0.1a
+
+  StephaneAG - 2017
+*/
+html, body { padding: 0; margin: 0; }
+body {
+  text-align: center;
+  font-family: monaco, monospace;
+  background: #1F1F1F;
+  //background-size: contain;
+  //background-repeat: no-repeat;
+}
+/* * { font-family: "Helvetica Neue", "Helvetica", Helvetica, Arial, sans-serif; } */
+* { font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif; }
+h1, h2 {
+  //display: inline-block;
+  background: #fff;
+}
+h1 {
+  font-size: 30px;
+  font-weight: 500;
+}
+h2 {
+  font-size: 20px;
+}
+span {
+  background: #fd0;
+}
+p { font-size: 16px; color: white; }
+.tiretSpacer {
+  width: 40px;
+  border-bottom: 1px solid grey;
+  margin: 0 auto;
+  margin-top: 20px;
+}
+.remoteBtn { margin-top: 5px; margin-bottom: 5px; display: block; color: white; cursor: pointer; }
+.appName { margin-bottom: 0px; padding: 10px; }
+.connectionStatus {  background: #7EF7EF; font-weight: 500; padding: 7px; margin: 0px; }
