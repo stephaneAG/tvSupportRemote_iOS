@@ -38,7 +38,7 @@
   /* TODO: write & add external CSS file */
   </style>
 </head>
-<body onload="welcomeUser()">
+<body>
   <!-- TODO: write REAL content - why not using Riotjs ? ( to try mixing it with manifest?json & localStorage stuff )-->
   <h1 class="appName">TvSupportRemote </h1>
   <h2 class="connectionStatus">Connected</h2>
@@ -51,6 +51,9 @@
 function welcomeUser(){
   alert('Hello World from Github repo deployment ! ;P');
 }
+
+// exec stuff when the page is loaded:
+window.onload = function () { welcomeUser(); }
 </script>
 </body>
 </html>
