@@ -42,9 +42,10 @@
        while when accessed on the laptop & through an xhr ran from the uC, we get '(index):82 GET http://192.168.1.15/tvSupportRemoteWebapp.css ' errors
   -->
   <!-- <link rel="stylesheet" type="text/css" href="tvSupportRemoteWebapp.css"></link> --> <!-- if stuff was hosted on the uC embedding the original page -->
-  <link rel="stylesheet" type="text/css" href="./tvSupportRemoteWebapp.css"></link> <!-- R: those links have to work & ref NOT to local but distant stuff -->
+  <!-- <link rel="stylesheet" type="text/css" href="./tvSupportRemoteWebapp.css"></link> --> <!-- R: those links have to work & ref NOT to local but distant stuff -->
+  <link rel="stylesheet" type="text/css" href="https://rawgit.com/stephaneAG/tvSupportRemote_iOS/master/tvSupportRemoteWebapp.css"></link>
 </head>
-<body onload="bodyLoaded()">
+<body onload="bodyLoaded()"> <!-- R: body onload 'll trigger errors if the stuff to be triggered is defined whithin a embed script tag -->
   <!-- TODO: write REAL content - why not using Riotjs ? ( to try mixing it with manifest?json & localStorage stuff )-->
   <h1 class="appName">TvSupportRemote </h1>
   <h2 class="connectionStatus">Connected</h2>
@@ -52,7 +53,8 @@
   <div class="tiretSpacer"></div>
 
 <!-- <script src="tvSupportRemoteWebapp.js"></script> --> <!-- if stuff was hosted on the uC embedding the original page -->
-<script src="./tvSupportRemoteWebapp.js"></script>
+<!-- <script src="./tvSupportRemoteWebapp.js"></script> --> <!-- same as above -->
+<script src="https://rawgit.com/stephaneAG/tvSupportRemote_iOS/master/tvSupportRemoteWebapp.js"></script> <!-- TODO: try passing an init param remoteRepUrl -->
 <script>
 /* TODO: write & add external js file(s) */
 // R: add code to check whether or not running from the springboard
