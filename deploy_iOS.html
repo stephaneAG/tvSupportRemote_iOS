@@ -37,7 +37,12 @@
   <style>
   /* TODO: write & add external CSS file */
   </style>
-  <link rel="stylesheet" type="text/css" href="tvSupportRemoteWebapp.css"></link>
+  <!--
+    R: the first one following works fine when testing page through github rawgit ( since files are hosted on the same server )
+       while when accessed on the laptop & through an xhr ran from the uC, we get '(index):82 GET http://192.168.1.15/tvSupportRemoteWebapp.css ' errors
+  -->
+  <!-- <link rel="stylesheet" type="text/css" href="tvSupportRemoteWebapp.css"></link> --> <!-- if stuff was hosted on the uC embedding the original page -->
+  <link rel="stylesheet" type="text/css" href="./tvSupportRemoteWebapp.css"></link> <!-- R: those links have to work & ref NOT to local but distant stuff -->
 </head>
 <body onload="bodyLoaded()">
   <!-- TODO: write REAL content - why not using Riotjs ? ( to try mixing it with manifest?json & localStorage stuff )-->
@@ -46,7 +51,8 @@
   <p>- Welcome, user :) -</p>
   <div class="tiretSpacer"></div>
 
-<script src="tvSupportRemoteWebapp.js"></script>
+<!-- <script src="tvSupportRemoteWebapp.js"></script> --> <!-- if stuff was hosted on the uC embedding the original page -->
+<script src="./tvSupportRemoteWebapp.js"></script>
 <script>
 /* TODO: write & add external js file(s) */
 // R: add code to check whether or not running from the springboard
