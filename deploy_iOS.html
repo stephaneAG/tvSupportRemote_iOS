@@ -1,0 +1,56 @@
+<html>
+
+<head>
+  <meta charset="UTF-8">
+  <title>TvSupportRemote V0.1a</title>
+  <meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no, width=device-width, shrink-to-fit=no">
+
+  <!-- Web App
+	================================== -->
+	<link rel="manifest" href="manifest.json">
+
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-touch-fullscreen" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+	<meta name="mobile-web-app-capable" content="yes">
+
+	<!-- Icons
+	================================== -->
+	<!-- Android -->
+	<link rel="icon" sizes="128x128" href="icons/icon-128.png"/>
+	<link rel="icon" sizes="192x192" href="icons/icon-192.png"/>
+
+	<!-- Apple -->
+	<link rel="apple-touch-icon" href="icons/icon-72.png"/>
+	<link rel="apple-touch-icon" sizes="76x76" href="icons/icon-76.png"/>
+	<link rel="apple-touch-icon" sizes="120x120" href="icons/icon-120.png"/>
+	<link rel="apple-touch-icon" sizes="128x128" href="icons/icon-128.png">
+	<link rel="apple-touch-icon" sizes="152x152" href="icons/icon-152.png"/>
+	<link rel="apple-touch-icon-precomposed" sizes="128x128" href="icons/icon-128.png">
+
+	<!-- Startup Image ( If user placed on home screen ) -->
+	<link rel="apple-touch-startup-image" href="icons/icon-128.png">
+
+  <!-- Startup Screen ( If user placed on home screen )-->
+  <link rel="apple-touch-startup-image" href="startup.png" /> <!-- R: to add ! -->
+
+  <style>
+  /* TODO: write & add external CSS file */
+  </style>
+</head>
+<body onload="welcomeUser()">
+  <!-- TODO: write REAL content - why not using Riotjs ? ( to try mixing it with manifest?json & localStorage stuff )-->
+  <h1 class="appName">TvSupportRemote </h1>
+  <h2 class="connectionStatus">Connected</h2>
+  <p>- Welcome, user :) -</p>
+  <div class="tiretSpacer"></div>
+<script>
+/* TODO: write & add external js file(s) */
+// R: add code to check whether or not running from the springboard
+// welcome the user that just DL-ed our app
+function welcomeUser(){
+  alert('Hello World from Github repo deployment ! ;P');
+}
+</script>
+</body>
+</html>
