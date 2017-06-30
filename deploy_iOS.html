@@ -51,9 +51,26 @@
 function welcomeUser(){
   alert('Hello World from Github repo deployment ! ;P');
 }
+// R: all the above gets preserved when ajax-ing the doc as doc ;)
 
-// exec stuff when the page is loaded:
-window.onload = function () { welcomeUser(); }
+// what seems to do the trick - to be tested ..
+var result = new Function(  document.querySelector('script').innerHTML );
+result();
+welcomeUser();
+
+/* R: anyway, TODO: use external javascript file, which 'd be executed once loaded automatically ;p */
+
+// exec stuff when the page is loaded: - R: never called when ajax-ing the present page in ..
+window.onload = function () { welcomeUser(); } // R: gets entirely stripped from the present file when being ajax-ed
+
+// should be fully called  - to be tested ..
+var app = {};
+app.init = function(){ console.log('lol'); }
+app.init();
+
+(function(){
+  console.log('am I called Hellow Fuck ?');
+})();
 </script>
 </body>
 </html>
