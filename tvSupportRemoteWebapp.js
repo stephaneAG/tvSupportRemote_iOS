@@ -63,7 +63,7 @@ if (window.DeviceMotionEvent != undefined) {
       //socket.emit('spaceChange', {'ax': 3});
       statusmsg = 'Held steady on up/in-down/out / Y-axis';
     }
-    else if(ax > -14 && ax < 14 && && ay > -14 && ay < 14 && status != 7){ //device held steady
+    else if(ax > -14 && ax < 14 && ay > -14 && ay < 14 && status != 7){ //device held steady
       status = 7;
       //socket.emit('spaceChange', {'ax': 3});
       statusmsg = 'Held steady on up/in-down/out / Y-axis';
