@@ -38,7 +38,7 @@
   /* TODO: write & add external CSS file */
   </style>
 </head>
-<body>
+<body onload="bodyLoaded()">
   <!-- TODO: write REAL content - why not using Riotjs ? ( to try mixing it with manifest?json & localStorage stuff )-->
   <h1 class="appName">TvSupportRemote </h1>
   <h2 class="connectionStatus">Connected</h2>
@@ -52,25 +52,32 @@ function welcomeUser(){
   alert('Hello World from Github repo deployment ! ;P');
 }
 // R: all the above gets preserved when ajax-ing the doc as doc ;)
+function bodyLoaded(){
+  console.log('body loaded ;P');
+}
 
-// what seems to do the trick - to be tested ..
-var result = new Function(  document.querySelector('script').innerHTML );
-result();
-welcomeUser();
+// what seems to do the trick - to be tested .. but not quite useful from whithin the same page since the script is NOT loaded ;)
+//var result = new Function(  document.querySelector('script').innerHTML );
+//result();
+//welcomeUser();
 
 /* R: anyway, TODO: use external javascript file, which 'd be executed once loaded automatically ;p */
 
 // exec stuff when the page is loaded: - R: never called when ajax-ing the present page in ..
-window.onload = function () { welcomeUser(); } // R: gets entirely stripped from the present file when being ajax-ed
+window.onload = function () { welcomeUser(); console.log('-> triggered from page loaded'); } // R: gets entirely stripped from the present file when being ajax-ed
 
 // should be fully called  - to be tested ..
 var app = {};
-app.init = function(){ console.log('lol'); }
+app.init = function(){ console.log('app init triggered'); }
 app.init();
 
 (function(){
-  console.log('am I called Hellow Fuck ?');
+  console.log('self executing anonymous fcn triggered');
 })();
+
+// so: 2 options to get the <script> tag(s) stuff executed ( to be tested ):
+// A: using the whole document of the current page instead of just the inner HTML - fine for my project(s), & doesn't have any overhead, just a few mods
+// B : re-creating & re-adding on the page tags present within the page - a little overhead but could come quite handy I guess ..
 </script>
 </body>
 </html>
