@@ -114,8 +114,14 @@ if (typeof(Storage) !== "undefined") {
 
         // TODO: Riotjs wip implm - handle the last views visible before app quit or app backgrounded
         // make sure we have a lastView & if so load it, else load the main-view ( for more advanced needs, we could check the appStates after lastView )
-        if( appConfig.lastView ) getBackTo( appConfig.lastView ); // route to the last view visible
-        else route('main-view'); // load main Riotjs view
+        if( appConfig.lastView ) {
+          getBackTo( appConfig.lastView ); // route to the last view visible
+          console.log('appConfig lastView: ', appConfig.lastView);
+        }
+        else {
+          //currentPage = riot.mount('div#riotViewsContainer', 'main-view')[0]; // untested yet
+          route('main-view'); // load main Riotjs view - causing troubles ?
+        }
 
 
     } else {
@@ -124,7 +130,8 @@ if (typeof(Storage) !== "undefined") {
         console.log('1st app launch: default config saved..');
         // CALLBACK APP CONFIG INIT DONE
 
-        route('main-view'); // load main Riotjs view
+        //currentPage = riot.mount('div#riotViewsContainer', 'main-view')[0]; // untested yet
+        route('main-view'); // load main Riotjs view - causing troubles ?
     }
 } else {
     // Sorry! No Web Storage support..
