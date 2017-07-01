@@ -79,6 +79,32 @@ function setInObj(obj, keyPath, value){
   currPath[ path[ path.length-1 ] ] = value;
 }
 
+// ---- TODO: write Riotjs quick test code ----
+// 'll hold a ref to the currently mounted page - could be useful later ;)
+var currentPage = null;
+
+// 'll setup a quick way to handle basic routes between views - TODO: add transition between views logic, structure, & js code :D
+route(function goTo(path) {
+  console.log('routing to path: ' + path);
+
+  if(currentPage){
+    currentPage.unmount(true); // necessary since both pages 'll be in the same place ( good practice to trigger their unmount evt )
+    // TODO: the above unmounting 'll be done on transiton end when using transitions between views :p
+  }
+  // handle basic paths ( ex: link with href="#hello" )
+  if(path === 'secondview'){
+    currentPage = riot.mount('div#riotViewsContainer', 'second-view')[0];
+  }
+  else if(path === 'thirdview'){
+    currentPage = riot.mount('div#riotViewsContainer', 'third-view')[0];
+  }
+  else {
+    currentPage = riot.mount('div#riotViewsContainer', 'main-view')[0];
+  }
+
+});
+route.start(true);
+
 
 // Riotjs helper to get the lastPage before app quit or app backgrounded
 function getBackTo(path) {
@@ -146,34 +172,6 @@ if (typeof(Storage) !== "undefined") {
   // quick test - setting the domain ip ( the uC one ) on the UI
   var tvSupportRemoteDomainStr = ': ' + document.domain;
   document.querySelector('.connectionStatus').innerHTML += tvSupportRemoteDomainStr;
-
-
-// ---- TODO: write Riotjs quick test code ----
-// 'll hold a ref to the currently mounted page - could be useful later ;)
-var currentPage = null;
-
-// 'll setup a quick way to handle basic routes between views - TODO: add transition between views logic, structure, & js code :D
-route(function goTo(path) {
-  console.log('routing to path: ' + path);
-
-  if(currentPage){
-    currentPage.unmount(true); // necessary since both pages 'll be in the same place ( good practice to trigger their unmount evt )
-    // TODO: the above unmounting 'll be done on transiton end when using transitions between views :p
-  }
-  // handle basic paths ( ex: link with href="#hello" )
-  if(path === 'second-view'){
-    currentPage = riot.mount('div#riotViewsContainer', 'second-view')[0];
-  }
-  else if(path === 'third-view'){
-    currentPage = riot.mount('div#riotViewsContainer', 'third-view')[0];
-  }
-  else {
-    currentPage = riot.mount('div#riotViewsContainer', 'main-view')[0];
-  }
-
-});
-route.start(true);
-
 
 
 // ---- TODO: write 'holdToOrient' code ----
