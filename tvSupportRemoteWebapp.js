@@ -147,6 +147,8 @@ var currentPage = null;
 
 // 'll setup a quick way to handle basic routes between views - TODO: add transition between views logic, structure, & js code :D
 route(function goTo(path) {
+  console.log('routing to path: ' + path);
+
   if(currentPage){
     currentPage.unmount(true); // necessary since both pages 'll be in the same place ( good practice to trigger their unmount evt )
     // TODO: the above unmounting 'll be done on transiton end when using transitions between views :p
