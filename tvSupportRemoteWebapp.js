@@ -7,6 +7,9 @@ console.log('tvSupportRemoteWebapp.js loaded');
 // TODO: add localStorage settings code
 
 // TODO: write app logic code
+  // quick test - setting the domain ip ( the uC one ) on the UI
+  var tvSupportRemoteDomainStr = ': ' + document.domain;
+  document.querySelector('.connectionStatus').innerHTML += tvSupportRemoteDomainStr;
 
 // TODO: write 'holdToOrient' code
 // Usage:
