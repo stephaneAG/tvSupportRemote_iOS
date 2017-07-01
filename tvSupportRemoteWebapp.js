@@ -40,7 +40,7 @@ if (typeof(Storage) !== "undefined") {
         // appConfig found
         appConfig = JSON.parse( localStorage.appConfig ); // retrieve the maybe modded but surely saved appConfig
         console.log('not the 1st app launch: previous config loaded ..');
-        console.log('appConfig: ' + appConfig);
+        console.log('appConfig: ', appConfig);
         // CALLBACK APP CONFIG INIT DONE
     } else {
         // No appConfig found -> create one from the defaultl
@@ -55,7 +55,7 @@ if (typeof(Storage) !== "undefined") {
 // TODO: once fully loaded / after some change in the config, update appConfig & save it to local storage:
 //setInObj(appConfig, 'dom.street.view', { this: 'is', another: 'obj'});
 //localStorage.appConfig = JSON.stringify ( appConfig ); // save the encoded appConfig as JSON
-
+// localStorage.removeItem('appConfig');  // to erase the appConfig from the local storage
 
 // ---- TODO: write app logic code ----
   // quick test - setting the domain ip ( the uC one ) on the UI
