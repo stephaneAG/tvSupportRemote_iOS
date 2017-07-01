@@ -213,3 +213,4 @@ window.addEventListener('deviceorientation', handleOrientation);
 
 // debug to check the need for a proper init fcn ..
 console.log('tvSupportRemoteWebapp.js loaded');
+window.onload = function () { console.log('tvSupportRemoteWebapp.js -> window.onload triggered !'); }
