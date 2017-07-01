@@ -119,8 +119,8 @@ if (typeof(Storage) !== "undefined") {
           console.log('appConfig lastView: ', appConfig.lastView);
         }
         else {
-          //currentPage = riot.mount('div#riotViewsContainer', 'main-view')[0]; // untested yet
-          route('main-view'); // load main Riotjs view - causing troubles ?
+          currentPage = riot.mount('div#riotViewsContainer', 'main-view')[0]; // untested yet
+          //route('main-view'); // load main Riotjs view - causing troubles ?
         }
 
 
@@ -130,8 +130,8 @@ if (typeof(Storage) !== "undefined") {
         console.log('1st app launch: default config saved..');
         // CALLBACK APP CONFIG INIT DONE
 
-        //currentPage = riot.mount('div#riotViewsContainer', 'main-view')[0]; // untested yet
-        route('main-view'); // load main Riotjs view - causing troubles ?
+        currentPage = riot.mount('div#riotViewsContainer', 'main-view')[0]; // untested yet
+        //route('main-view'); // load main Riotjs view - causing troubles ?
     }
 } else {
     // Sorry! No Web Storage support..
