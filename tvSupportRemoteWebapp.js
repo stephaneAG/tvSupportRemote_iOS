@@ -17,7 +17,7 @@ var lastStatus = 0;
 var status = 0;
 var orientationStatusLog = null; // = document.querySelector('.orientationStatus');
 window.onload = function () { orientationStatusLog = document.querySelector('.orientationStatus'); }
-var statusmsg;
+var statusmsg = '';
 //Detect if the browser supports DeviceMotionEvent ( accelerometer )
 if (window.DeviceMotionEvent != undefined) {
 
