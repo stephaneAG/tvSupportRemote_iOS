@@ -91,15 +91,18 @@ route(function goTo(path) {
     currentPage.unmount(true); // necessary since both pages 'll be in the same place ( good practice to trigger their unmount evt )
     // TODO: the above unmounting 'll be done on transiton end when using transitions between views :p
   }
-  // handle basic paths ( ex: link with href="#hello" )
+  // handle basic paths ( ex: link with href="#hello" ) - // R TODO: check if it's returning the currentPage that makes the troubles on init
   if(path === 'secondview'){
-    currentPage = riot.mount('div#riotViewsContainer', 'second-view')[0];
+    //currentPage = riot.mount('div#riotviews', 'second-view')[0];
+    riot.mount('div#riotviews', 'second-view');
   }
   else if(path === 'thirdview'){
-    currentPage = riot.mount('div#riotViewsContainer', 'third-view')[0];
+    //currentPage = riot.mount('div#riotviews', 'third-view')[0];
+    riot.mount('div#riotviews', 'third-view');
   }
   else {
-    currentPage = riot.mount('div#riotViewsContainer', 'main-view')[0];
+    //currentPage = riot.mount('div#riotviews', 'main-view')[0];
+    riot.mount('div#riotviews', 'main-view');
   }
 
 });
@@ -112,15 +115,18 @@ function getBackTo(path) {
     currentPage.unmount(true); // necessary since both pages 'll be in the same place ( good practice to trigger their unmount evt )
     // TODO: the above unmounting 'll be done on transiton end when using transitions between views :p
   }
-  // handle basic paths ( ex: link with href="#hello" )
+  // handle basic paths ( ex: link with href="#hello" ) - // R TODO: check if it's returning the currentPage that makes the troubles on init
   if(path === 'secondview'){
-    currentPage = riot.mount('div#riotviews', 'second-view')[0];
+    //currentPage = riot.mount('div#riotviews', 'second-view')[0];
+    riot.mount('div#riotviews', 'second-view');
   }
   else if(path === 'thirdview'){
-    currentPage = riot.mount('div#riotviews', 'third-view')[0];
+    //currentPage = riot.mount('div#riotviews', 'third-view')[0];
+    riot.mount('div#riotviews', 'third-view');
   }
   else {
-    currentPage = riot.mount('div#riotviews', 'main-view')[0];
+    //currentPage = riot.mount('div#riotviews', 'main-view')[0];
+    riot.mount('div#riotviews', 'main-view');
   }
 }
 
@@ -140,7 +146,7 @@ if (typeof(Storage) !== "undefined") {
 
         // TODO: Riotjs wip implm - handle the last views visible before app quit or app backgrounded
         // make sure we have a lastView & if so load it, else load the main-view ( for more advanced needs, we could check the appStates after lastView )
-        if( appConfig.lastView ) {
+        if( typeof(appConfig.lastView) !== "undefined" ) {
           getBackTo( appConfig.lastView ); // route to the last view visible
           console.log('appConfig lastView: ', appConfig.lastView);
         }
