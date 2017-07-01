@@ -1,5 +1,5 @@
 /* tv support remote webapp V0.1a - JS
- 
+
   StephaneAG - 2017
 */
 console.log('tvSupportRemoteWebapp.js loaded');
@@ -15,7 +15,8 @@ console.log('tvSupportRemoteWebapp.js loaded');
 
 var lastStatus = 0;
 var status = 0;
-var orientationStatusLog = document.querySelector('.orientationStatus');
+var orientationStatusLog = null; // = document.querySelector('.orientationStatus');
+window.onload = function () { var orientationStatusLog = document.querySelector('.orientationStatus'); }
 var statusmsg;
 //Detect if the browser supports DeviceMotionEvent ( accelerometer )
 if (window.DeviceMotionEvent != undefined) {
@@ -71,7 +72,7 @@ if (window.DeviceMotionEvent != undefined) {
 
     // map orientation change to commands to be sent ot the uC
     if( status != lastStatus ){
-      orientationStatusLog.innerHTML = statusmsg;
+      if( orientationStatusLog != null ) orientationStatusLog.innerHTML = statusmsg;
       // if status is steady on both, send 'ok' command
       // if status is steady on either X or Y but not on the other one, send 'ok' command then 'new direction command'
       // [ if status isn't steady at all ( diagonals ) - not currently handled ]
