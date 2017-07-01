@@ -35,7 +35,7 @@ function handleOrientation(event) {
   output.innerHTML  = "beta : " + x + "\n";
   output.innerHTML += "gamma: " + y + "\n";
 
-  tvAndSupport.style.transform = 'translateZ(' + Math.floor(event.beta*2) + 'px) rotateY('+ Math.floor(event.gamma*2) +'deg)';
+  tvAndSupport.style.transform = 'translateZ(' + Math.floor(event.beta*1.5) + 'px) rotateY('+ Math.floor(event.gamma*1) +'deg)';
 }
 
 window.addEventListener('deviceorientation', handleOrientation);
