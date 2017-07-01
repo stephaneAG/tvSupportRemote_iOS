@@ -2,7 +2,7 @@
 
   StephaneAG - 2017
 */
-console.log('tvSupportRemoteWebapp.js loaded');
+console.log('tvSupportRemoteWebapp.js is loading & executing ..');
 
 
 /* --  Riotjs observable to dispatch config update -- */
@@ -208,3 +208,8 @@ function handleOrientation(event) {
 }
 
 window.addEventListener('deviceorientation', handleOrientation);
+
+
+
+// debug to check the need for a proper init fcn ..
+console.log('tvSupportRemoteWebapp.js loaded');
