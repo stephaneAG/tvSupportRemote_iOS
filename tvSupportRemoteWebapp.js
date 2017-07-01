@@ -87,14 +87,14 @@ function getBackTo(path) {
     // TODO: the above unmounting 'll be done on transiton end when using transitions between views :p
   }
   // handle basic paths ( ex: link with href="#hello" )
-  if(path === 'second-view'){
-    currentPage = riot.mount('div#riotViewsContainer', 'second-view')[0];
+  if(path === 'secondview'){
+    currentPage = riot.mount('div#riotviews', 'second-view')[0];
   }
-  else if(path === 'third-view'){
-    currentPage = riot.mount('div#riotViewsContainer', 'third-view')[0];
+  else if(path === 'thirdview'){
+    currentPage = riot.mount('div#riotviews', 'third-view')[0];
   }
   else {
-    currentPage = riot.mount('div#riotViewsContainer', 'main-view')[0];
+    currentPage = riot.mount('div#riotviews', 'main-view')[0];
   }
 }
 
@@ -119,7 +119,7 @@ if (typeof(Storage) !== "undefined") {
           console.log('appConfig lastView: ', appConfig.lastView);
         }
         else {
-          currentPage = riot.mount('div#riotViewsContainer', 'main-view')[0]; // untested yet
+          currentPage = riot.mount('div#riotviews', 'main-view')[0]; // untested yet
           //route('main-view'); // load main Riotjs view - causing troubles ?
         }
 
@@ -130,7 +130,7 @@ if (typeof(Storage) !== "undefined") {
         console.log('1st app launch: default config saved..');
         // CALLBACK APP CONFIG INIT DONE
 
-        currentPage = riot.mount('div#riotViewsContainer', 'main-view')[0]; // untested yet
+        currentPage = riot.mount('div#riotviews', 'main-view')[0]; // untested yet
         //route('main-view'); // load main Riotjs view - causing troubles ?
     }
 } else {
