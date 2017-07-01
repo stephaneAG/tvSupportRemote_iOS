@@ -42,19 +42,20 @@ p { font-size: 16px; color: white; }
 .tvScreenContainer {
   position: relative;
   backface-visibility: visible;
-   perspective: 300px;
-   transform-style: preserve-3d;
-   -webkit-backface-visibility: visible;
-   -webkit-perspective: 300px;
-   -webkit-transform-style: preserve-3d;
-  width : 200px;
+  perspective: 300px;
+  perspective-origin: center center;
+  transform-style: preserve-3d;
+  -webkit-backface-visibility: visible;
+  -webkit-transform-style: preserve-3d;
+  width: 200px;
   height: 100px;
-  border: 5px solid #CCC;
+  border: 1px solid ghostwhite;
   border-radius: 5px;
+  left: calc(50% - 100px);
 }
 
 .ball {
-  //display: none;
+  display: none;
   transform: translateZ(100px);
   position: absolute;
   z-index: 2;
@@ -73,7 +74,9 @@ p { font-size: 16px; color: white; }
   width : 100px;
   height: 60px;
   border-radius: 5px;
-  background: cadetblue;
+  background: #7EF7EF;
   border-radius: 5px;
-  border: 2px solid grey;
+  border: 2px solid ghostwhite;
 }
+
+.output { color: white; }
