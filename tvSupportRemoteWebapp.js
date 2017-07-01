@@ -1,122 +1,206 @@
-<html>
+/* tv support remote webapp V0.1a - JS
 
-<head>
-  <meta charset="UTF-8">
-  <title>TvSupportRemote V0.1a  - iOS deployment</title>
-  <meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no, width=device-width, shrink-to-fit=no">
+  StephaneAG - 2017
+*/
+console.log('tvSupportRemoteWebapp.js loaded');
 
-  <!-- Web App
-	================================== -->
-	<link rel="manifest" href="manifest.json">
 
-  <meta name="apple-mobile-web-app-capable" content="yes">
-  <meta name="apple-touch-fullscreen" content="yes">
-  <meta name="apple-mobile-web-app-status-bar-style" content="black">
-	<meta name="mobile-web-app-capable" content="yes">
+/* --  Riotjs observable to dispatch config update -- */
+function appConfig_UpdateService(){
+  console.log('appConfig_UpdateService instance created');
 
-	<!-- Icons
-	================================== -->
-	<!-- Android -->
-	<link rel="icon" sizes="128x128" href="icons/icon-128.png"/>
-	<link rel="icon" sizes="192x192" href="icons/icon-192.png"/>
-
-	<!-- Apple -->
-	<link rel="apple-touch-icon" href="icons/icon-72.png"/>
-	<link rel="apple-touch-icon" sizes="76x76" href="icons/icon-76.png"/>
-	<link rel="apple-touch-icon" sizes="120x120" href="icons/icon-120.png"/>
-	<link rel="apple-touch-icon" sizes="128x128" href="icons/icon-128.png">
-	<link rel="apple-touch-icon" sizes="152x152" href="icons/icon-152.png"/>
-	<link rel="apple-touch-icon-precomposed" sizes="128x128" href="icons/icon-128.png">
-
-	<!-- Startup Image ( If user placed on home screen ) -->
-	<link rel="apple-touch-startup-image" href="icons/icon-128.png">
-
-  <!-- Startup Screen ( If user placed on home screen )-->
-  <link rel="apple-touch-startup-image" href="startup.png" /> <!-- R: to add ! -->
-
-  <style>
-  /* TODO: write & add external CSS file */
-  </style>
-  <!--
-    R: the first one following works fine when testing page through github rawgit ( since files are hosted on the same server )
-       while when accessed on the laptop & through an xhr ran from the uC, we get '(index):82 GET http://192.168.1.15/tvSupportRemoteWebapp.css ' errors
-  -->
-  <!-- <link rel="stylesheet" type="text/css" href="tvSupportRemoteWebapp.css"></link> --> <!-- if stuff was hosted on the uC embedding the original page -->
-  <!-- <link rel="stylesheet" type="text/css" href="./tvSupportRemoteWebapp.css"></link> --> <!-- R: those links have to work & ref NOT to local but distant stuff -->
-  <link rel="stylesheet" type="text/css" href="https://rawgit.com/stephaneAG/tvSupportRemote_iOS/master/tvSupportRemoteWebapp.css"></link>
-</head>
-<body onload="bodyLoaded()"> <!-- R: body onload 'll trigger errors if the stuff to be triggered is defined whithin a embed script tag -->
-  <!-- TODO: write REAL content - why not using Riotjs ? ( to try mixing it with manifest?json & localStorage stuff )-->
-  <h1 class="appName">TvSupportRemote </h1>
-  <h2 class="connectionStatus">Connected</h2>
-  <p>- Welcome, user :) -</p>
-  <div class="tiretSpacer"></div>
-  <p class="orientationStatus"></p>
-
-  <!-- tv screen & support css animation -->
-  <div class="tvScreenContainer">
-    <div class="ball"></div>
-    <div class="tvAndSupport"></div>
-  </div>
-<pre class="output"></pre>
-
-<!-- RIOTJS DEBUG PART -->
-<!-- App UI start -->
-<div id="appContainer">
-  <a href="#second-view" class="btn btn-info">Go to "second-view"</a> <!-- debug view changer -->
-  <a href="#third-view" class="btn btn-info">Go to "third-view"</a> <!-- debug view changer -->
-  <!-- App View(s) -->
-  <div id="riotViewsContainer"> </div> <!-- all Riotjs views are loaded here during debug -->
-</div>
-
-<!-- Views -->
-<script type="riot/tag" src="./views/main-view.tag"></script> <!-- main-view ( test ) -->
-<script type="riot/tag" src="./views/second-view.tag"></script> <!-- 2nde view - could be a param view or a profile view -->
-<script type="riot/tag" src="./views/third-view.tag"></script> <!-- 2nde view - could be a param view or a profile view -->
-
-<!-- Riot -->
-<script src="https://rawgit.com/stephaneAG/tvSupportRemote_iOS/master/riot+compiler.min.js"></script>
-<script src="https://rawgit.com/stephaneAG/tvSupportRemote_iOS/master/route.min.js"></script>
-
-<!-- <script>riot.mount('mainView')</script> -->
-<!-- mount normally - done in the below external js file -->
-
-<!-- <script src="tvSupportRemoteWebapp.js"></script> --> <!-- if stuff was hosted on the uC embedding the original page -->
-<!-- <script src="./tvSupportRemoteWebapp.js"></script> --> <!-- same as above -->
-<script src="https://rawgit.com/stephaneAG/tvSupportRemote_iOS/master/tvSupportRemoteWebapp.js"></script> <!-- TODO: try passing an init param remoteRepUrl -->
-<script>
-/* TODO: write & add external js file(s) */
-// R: add code to check whether or not running from the springboard
-// welcome the user that just DL-ed our app
-function welcomeUser(){
-  console.log('Hello World from Github repo deployment ! ;P');
+  // make instance observable
+  riot.observable(this);
+  // listen to 'update' event ( something has been updated )
+  this.on('update', function(data){
+    console.log('appConfig_UpdateService received an UPDATE event');
+    // update value of key specified ( appConfig as app then some.stuff.like.so )
+    //appConfig.the.stuff.to.be.updated.and.saved = someVal; // update the appConfig js Object
+    setInObj(appConfig, data.key, data.value);
+    // dispatch update event to the storage service AS WELL AS observable for that value ?
+    console.log('appConfig_UpdateService dispatching an appConfig_SaveService SAVE event');
+    appConfigUpdateService.trigger('save');
+  })
 }
-// R: all the above gets preserved when ajax-ing the doc as doc ;)
-function bodyLoaded(){
-  console.log('body loaded ;P');
+// make a new instance
+var appConfigUpdateService = new appConfig_UpdateService();
+//appConfigUpdateService.trigger('update', { key: 'the.app.config.key', value: 'The value to be saved' });
+
+
+/* --  Riotjs observable to dispatch config save -- */
+function appConfig_SaveService(){
+  console.log('appConfig_SaveService instance created');
+  // make instance observable
+  riot.observable(this);
+  // listen to 'save' event ( something has likely been updated & needs to be saved )
+  this.on('save', function(){
+    console.log('appConfig_SaveService received a SAVE event')
+    // save value to key specified ( appConfig as app then some.stuff.like.so )
+    localStorage.appConfig = JSON.stringify ( appConfig ); // save the encoded appConfig as JSON
+    // dispatch saved event ?
+  });
+  // listen to 'reset' event ( resets the appConfig to the default one )
+  this.on('reset', function(){
+    console.log('appConfig_SaveService received a RESET event')
+    // save value to key specified ( appConfig as app then some.stuff.like.so )
+    localStorage.removeItem( 'appConfig' ); // remove the appConfig from the local storage
+    // dispatch saved event ?
+  });
+
+}
+// make a new instance
+var appConfig_saveService = new appConfig_SaveService();
+//appConfigUpdateService.trigger('save');
+//appConfigUpdateService.trigger('reset');
+
+
+// ---- TODO: add localStorage settings code ----
+// app config quick setter helper
+function setInObj(obj, keyPath, value){
+  var currPath = obj;
+  var path  = keyPath.split('.');
+  console.log('path from keyPath: ' + path);
+  for(var i=0; i < path.length-1; i++){
+    console.log('path chunk: ' + path[i]);
+    if (typeof(currPath[ path[i] ]) !== "undefined") {
+      console.log('path chunk exist: ' + currPath[ path[i] ]);
+      currPath = currPath[ path[i] ];
+      //console.log(obj); // DEBUG
+      //console.log(currPath); // DEBUG
+    } else {
+      //console.log('path added: ' + currPath[ path[i] ]);
+      currPath[ path[i] ] = {};
+      currPath = currPath[ path[i] ];
+      //console.log(obj); // DEBUG
+      //console.log(currPath); // DEBUG
+    }
+  }
+  //currPath = value; // not working ?
+  currPath[ path[ path.length-1 ] ] = value;
 }
 
-// what seems to do the trick - to be tested .. but not quite useful from whithin the same page since the script is NOT loaded ;)
-//var result = new Function(  document.querySelector('script').innerHTML );
-//result();
-//welcomeUser();
 
-/* R: anyway, TODO: use external javascript file, which 'd be executed once loaded automatically ;p */
+// Riotjs helper to get the lastPage before app quit or app backgrounded
+function getBackTo(path) {
+  if(currentPage){
+    currentPage.unmount(true); // necessary since both pages 'll be in the same place ( good practice to trigger their unmount evt )
+    // TODO: the above unmounting 'll be done on transiton end when using transitions between views :p
+  }
+  // handle basic paths ( ex: link with href="#hello" )
+  if(path === 'second-view'){
+    currentPage = riot.mount('div#riotViewsContainer', 'second-view')[0];
+  }
+  else if(path === 'third-view'){
+    currentPage = riot.mount('div#riotViewsContainer', 'third-view')[0];
+  }
+  else {
+    currentPage = riot.mount('div#riotViewsContainer', 'main-view')[0];
+  }
+}
 
-// exec stuff when the page is loaded: - R: never called when ajax-ing the present page in ..
-window.onload = function () { welcomeUser(); console.log('-> triggered from page loaded'); } // R: gets entirely stripped from the present file when being ajax-ed
-// should be fully called  - to be tested ..
-var app = {};
-app.init = function(){ console.log('app init triggered'); }
-app.init();
 
-(function(){
-  console.log('self executing anonymous fcn triggered');
-})();
+/* -- App (re)start -- */
+var appConfig = { title: 'check' }; // default app config
 
-// so: 2 options to get the <script> tag(s) stuff executed ( to be tested ):
-// A: using the whole document of the current page instead of just the inner HTML - fine for my project(s), & doesn't have any overhead, just a few mods
-// B : re-creating & re-adding on the page tags present within the page - a little overhead but could come quite handy I guess ..
-</script>
-</body>
-</html>
+// check if browser storage supported ( else we'll run into errors & cie, so better use the default config if this is the case, or provide a way to do so when generating the app)
+if (typeof(Storage) !== "undefined") {
+    // Code for localStorage/sessionStorage.
+    if (typeof(localStorage.appConfig) !== "undefined") {
+        // appConfig found
+        appConfig = JSON.parse( localStorage.appConfig ); // retrieve the maybe modded but surely saved appConfig
+        console.log('not the 1st app launch: previous config loaded ..');
+        console.log('appConfig: ', appConfig);
+        // CALLBACK APP CONFIG INIT DONE
+
+        // TODO: Riotjs wip implm - handle the last views visible before app quit or app backgrounded
+        // make sure we have a lastView & if so load it, else load the main-view ( for more advanced needs, we could check the appStates after lastView )
+        if( appConfig.lastView ) {
+          getBackTo( appConfig.lastView ); // route to the last view visible
+          console.log('appConfig lastView: ', appConfig.lastView);
+        }
+        else {
+          //currentPage = riot.mount('div#riotViewsContainer', 'main-view')[0]; // untested yet
+          route('main-view'); // load main Riotjs view - causing troubles ?
+        }
+
+
+    } else {
+        // No appConfig found -> create one from the defaultl
+        localStorage.appConfig = JSON.stringify ( appConfig ); // save the encoded appConfig as JSON
+        console.log('1st app launch: default config saved..');
+        // CALLBACK APP CONFIG INIT DONE
+
+        //currentPage = riot.mount('div#riotViewsContainer', 'main-view')[0]; // untested yet
+        route('main-view'); // load main Riotjs view - causing troubles ?
+    }
+} else {
+    // Sorry! No Web Storage support..
+}
+
+// TODO: once fully loaded / after some change in the config, update appConfig & save it to local storage:
+//setInObj(appConfig, 'dom.street.view', { this: 'is', another: 'obj'});
+//localStorage.appConfig = JSON.stringify ( appConfig ); // save the encoded appConfig as JSON
+// localStorage.removeItem('appConfig');  // to erase the appConfig from the local storage
+
+// ---- TODO: write app logic code ----
+  // quick test - setting the domain ip ( the uC one ) on the UI
+  var tvSupportRemoteDomainStr = ': ' + document.domain;
+  document.querySelector('.connectionStatus').innerHTML += tvSupportRemoteDomainStr;
+
+
+// ---- TODO: write Riotjs quick test code ----
+// 'll hold a ref to the currently mounted page - could be useful later ;)
+var currentPage = null;
+
+// 'll setup a quick way to handle basic routes between views - TODO: add transition between views logic, structure, & js code :D
+route(function goTo(path) {
+  console.log('routing to path: ' + path);
+
+  if(currentPage){
+    currentPage.unmount(true); // necessary since both pages 'll be in the same place ( good practice to trigger their unmount evt )
+    // TODO: the above unmounting 'll be done on transiton end when using transitions between views :p
+  }
+  // handle basic paths ( ex: link with href="#hello" )
+  if(path === 'second-view'){
+    currentPage = riot.mount('div#riotViewsContainer', 'second-view')[0];
+  }
+  else if(path === 'third-view'){
+    currentPage = riot.mount('div#riotViewsContainer', 'third-view')[0];
+  }
+  else {
+    currentPage = riot.mount('div#riotViewsContainer', 'main-view')[0];
+  }
+
+});
+route.start(true);
+
+
+
+// ---- TODO: write 'holdToOrient' code ----
+// Usage:
+// when pressing the btn, hold still: this will be the reference position
+// while still pressing the btn, orient gently iPhone ( above 14xp threshold ) for the movement to be quickly parsed & sent to the uC as a set of or or command
+
+// I need the GYROSCOPE ORIENTATION & NOT the ACCELEROMETER MOTION ;)
+/*
+window.addEventListener('deviceorientation', function(event) {
+  console.log(event.alpha + ' : ' + event.beta + ' : ' + event.gamma);
+});
+*/
+
+//var ball   = document.querySelector('.ball');
+var tvAndSupport = document.querySelector('.tvAndSupport');
+var garden = document.querySelector('.tvScreenContainer');
+var output = document.querySelector('.output');
+
+function handleOrientation(event) {
+  var x = event.beta;  // In degree in the range [-180,180]
+  var y = event.gamma; // In degree in the range [-90,90]
+
+  output.innerHTML  = "beta : " + x + "\n";
+  output.innerHTML += "gamma: " + y + "\n";
+
+  tvAndSupport.style.transform = 'translateZ(' + Math.floor(event.beta*1.5) + 'px) rotateY('+ Math.floor(event.gamma*1) +'deg)';
+}
+
+window.addEventListener('deviceorientation', handleOrientation);
