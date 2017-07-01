@@ -73,10 +73,13 @@ if (window.DeviceMotionEvent != undefined) {
     // map orientation change to commands to be sent ot the uC
     if( status != lastStatus ){
       if( orientationStatusLog != null ) orientationStatusLog.innerHTML = statusmsg;
+      console.log('status: ' + status + ', statusmsg: ' + statusmsg);
       // if status is steady on both, send 'ok' command
       // if status is steady on either X or Y but not on the other one, send 'ok' command then 'new direction command'
       // [ if status isn't steady at all ( diagonals ) - not currently handled ]
       // if status changed to any other flag, send 'ok' command then 'new direction command'
+
+      lastStatus = status; // update
     }
   }
 }
