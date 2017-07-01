@@ -51,6 +51,7 @@
   <h2 class="connectionStatus">Connected</h2>
   <p>- Welcome, user :) -</p>
   <div class="tiretSpacer"></div>
+  <p class="orientationStatus"></p>
 
 <!-- <script src="tvSupportRemoteWebapp.js"></script> --> <!-- if stuff was hosted on the uC embedding the original page -->
 <!-- <script src="./tvSupportRemoteWebapp.js"></script> --> <!-- same as above -->
@@ -76,7 +77,6 @@ function bodyLoaded(){
 
 // exec stuff when the page is loaded: - R: never called when ajax-ing the present page in ..
 window.onload = function () { welcomeUser(); console.log('-> triggered from page loaded'); } // R: gets entirely stripped from the present file when being ajax-ed
-
 // should be fully called  - to be tested ..
 var app = {};
 app.init = function(){ console.log('app init triggered'); }
